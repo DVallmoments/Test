@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="BoardMapper">
+
+	<select id="listAll" resultType="com.test.myapp.vo.BoardDTO">
+		SELECT bno, title, writer, regDate FROM Tboard ORDER BY bno desc, regDate desc
+	</select>
+
+	<insert id="writing">
+		INSERT INTO Tboard (bno, title, content, writer) VALUES (Tboard_seq.NEXTVAL, #{title}, #{content}, #{writer})
+	</insert>
+
+	<select id="view" parameterType="int" resultType="com.test.myapp.vo.BoardDTO">
+		SELECT * FROM Tboard WHERE bno = #{bno}
+	</select>
+
+	<update id="modify" parameterType="com.test.myapp.vo.BoardDTO">
+		UPDATE Tboard SET title = #{title}, content = #{content}, writer = #{writer} WHERE bno = #{bno}
+	</update>
+
+	<delete id="delete" parameterType="int">
+		DELETE FROM Tboard WHERE bno = #{bno}
+	</delete>
+	
+</mapper>
